@@ -1,0 +1,17 @@
+version: '3'
+services:
+  web:
+    build: .
+    env_file:
+      - ./.env
+      - ./.env.local
+    command: bundle exec rails s -p 3002 -b '0.0.0.0'
+    volumes:
+      - .:/speed_typing_tutor
+    # ports mapping HOST:CONTAINER (high recommended specify HOST port)
+    ports:
+      - "3002:3002"
+    # add hosts mapping (the same as docker run --add-host)
+    # this option adds into /etc/hosts file a string <database_ip> database inside the container
+    extra_hosts:
+      database: database_ip
